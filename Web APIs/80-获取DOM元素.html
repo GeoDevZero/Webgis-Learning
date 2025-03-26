@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* .box {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    } */
+  </style>
+</head>
+
+<body>
+
+  <!-- <div class="box">123</div>
+  <div class="box">abc</div>
+  <p id="nav">导航栏</p> -->
+  <ul class="nav">
+    <li>我的首页</li>
+    <li>产品介绍</li>
+    <li>联系我们</li>
+  </ul>
+  <script>
+    // 获取匹配的第一个元素
+    // const box = document.querySelector('.box')
+    // console.dir(box)
+    // console.log(box)
+
+    // const nav = document.querySelector('#nav')
+    // console.dir(nav)
+
+    /* 请控制台依次输出 3个 li 的 DOM对象 */
+    const ul = document.querySelector('.nav')
+    const lis = document.querySelectorAll('.nav li')
+    console.dir(ul)
+    console.dir(lis)
+    for (let i = 0; i < lis.length; i++) {
+      console.dir(lis[i])
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <img src="./images/1.webp" alt="">
+</body>
+<script>
+  // // 1.获取图片元素
+  // const pic = document.querySelector('img')
+  // // 2.修改图片对象的属性
+  // pic.src = './images/2.webp'
+  // pic.title = "我的自拍"
+
+  /* 页面刷新，图片随机更换
+    需求：当我们刷新页面，页面中的图片随机显示不同的图片
+    分析：
+    ①：随机显示，则需要用到随机函数
+    ②：更换图片需要用到图片的 src 属性，进行修改
+    ③：核心思路：
+    1. 获取图片元素
+    2. 随机得到图片序号
+    3. 图片.src = 图片随机路径 */
+
+  function getRandom(N, M) {
+    return Math.floor(Math.random() * (M - N + 1)) + N
+  }
+  const re = getRandom(1, 6)
+  const pic = document.querySelector('img')
+  pic.src = `./images/${re}.webp`
+
+</script>
+
+</html>
