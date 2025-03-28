@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <input type="text" value="撒的"> -->
+  <!-- checked = checked -->
+  <input type="checkbox" name="" id="" checked>
+  <!-- disabled = disabled -->
+  <button disabled>点击</button>
+
+  <script>
+    // 1.获取元素
+    // const uname = document.querySelector('input')
+    // // 2.获取表单里面的值 使用 表单.value
+    // console.log(uname.value)
+    // // 3.通过JS修改表单的值
+    // // uname.value = '雷克萨斯'
+    // // 4.修改value的类型
+    // uname.type = 'password'\
+
+    // 通过JS使得多选框勾选取消
+    const ipt = document.querySelector('input')
+    ipt.checked = false
+
+    // 通过JS使得禁用按钮取消掉
+    const but = document.querySelector('button')
+    but.disabled = false
+
+  </script>
+</body>
+
+</html>

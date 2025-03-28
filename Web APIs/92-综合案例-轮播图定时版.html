@@ -99,7 +99,7 @@
     <div class="slider-footer">
       <p>对人类来说会不会太超前了？</p>
       <ul class="slider-indicator">
-        <li></li>
+        <li class="active"></li>
         <li></li>
         <li></li>
         <li></li>
@@ -115,6 +115,19 @@
     </div>
   </div>
   <script>
+    /* 轮播图定时器版
+          需求：每隔一秒钟切换一个图片
+          分析：
+          ①：准备一个数组对象，里面包含详细信息（素材包含）
+          ②：获取元素
+          ③：设置定时器函数
+          设置一个变量++
+          找到变量对应的对象
+          更改图片、文字信息
+          激活小圆点：移除上一个高亮的类名，当前变量对应的小圆点添加类
+          ④：处理图片自动复原从头播放（放到变量++后面，紧挨）
+          如果图片播放到最后一张， 就是大于等于数组的长度
+          则把变量重置为0 */
     // 1. 初始数据
     const sliderData = [
       { url: './images/slider01.jpg', title: '对人类来说会不会太超前了？', color: 'rgb(100, 67, 68)' },
@@ -127,36 +140,31 @@
       { url: './images/slider08.jpg', title: '谁不想和小猫咪贴贴呢！', color: 'rgb(99, 72, 114)' },
     ]
 
-
-    // 1.生成一个随机数
-    // function getRandom(N, M) {
-    //   return Math.floor(Math.random() * (M - N + 1)) + N
-    // }
-    // const random = getRandom(0, 7)
-    const random = parseInt(Math.random() * sliderData.length)
-    // console.log(sliderData[random]);
-
-    // 2.渲染数据
-    // 2.1 获取图片元素
+    // 获取元素
     const img = document.querySelector('.slider-wrapper img')
-    // 2.2 修改图片路径
-    img.src = sliderData[random].url
-
-    // 3.更换p标签内容
-    // 3.1 获取p
     const p = document.querySelector('.slider-footer p')
-    // 3.2 替换p内容
-    p.innerHTML = sliderData[random].title
+    // const active = document.querySelector('.slider-indicator')
 
-    // 4.修改盒子颜色
-    // 4.1 获取盒子元素
-    const bgc = document.querySelector('.slider-footer')
-    bgc.style.backgroundColor = sliderData[random].color
+    // 设置定时器
+    let i = 0
+    setInterval(function () {
+      i++
+      if (i >= sliderData.length) {
+        i = 0
+      }
+      img.src = sliderData[i].url
+      p.innerHTML = sliderData[i].title
+      // 小圆点
+      // 删除当前active
+      document.querySelector('.slider-indicator .active').classList.remove('active')
+      // 只让当前li添加active
+      document.querySelector(`.slider-indicator li:nth-child(${i + 1})`).classList.add('active')
 
-    // 5.小圆点
-    const li = document.querySelector(`.slider-indicator li:nth-child(${random + 1})`)
 
-    li.classList.add('active')
+
+
+    }, 1000)
+
   </script>
 </body>
 
