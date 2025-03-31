@@ -115,19 +115,6 @@
     </div>
   </div>
   <script>
-    /* 轮播图定时器版
-          需求：每隔一秒钟切换一个图片
-          分析：
-          ①：准备一个数组对象，里面包含详细信息（素材包含）
-          ②：获取元素
-          ③：设置定时器函数
-          设置一个变量++
-          找到变量对应的对象
-          更改图片、文字信息
-          激活小圆点：移除上一个高亮的类名，当前变量对应的小圆点添加类
-          ④：处理图片自动复原从头播放（放到变量++后面，紧挨）
-          如果图片播放到最后一张， 就是大于等于数组的长度
-          则把变量重置为0 */
     // 1. 初始数据
     const sliderData = [
       { url: './images/slider01.jpg', title: '2022，明星陪你过大年！', color: 'rgb(100, 67, 68)' },
@@ -139,32 +126,63 @@
       { url: './images/slider07.jpg', title: '哔哩哔哩小年YEAH', color: 'rgb(53, 29, 25)' },
       { url: './images/slider08.jpg', title: '一站式解决你的电脑配置问题！！！', color: 'rgb(99, 72, 114)' },
     ]
-
-    // 获取元素
     const img = document.querySelector('.slider-wrapper img')
     const p = document.querySelector('.slider-footer p')
-    // const active = document.querySelector('.slider-indicator')
-
-    // 设置定时器
-    let i = 0
-    setInterval(function () {
+    const footer = document.querySelector('.slider-footer')
+    // 右侧按钮
+    const next = document.querySelector('.next')
+    let i = 0 //信号量，控制播放图片张数
+    next.addEventListener('click', function () {
+      // console.log(11);
       i++
-      if (i >= sliderData.length) {
-        i = 0
-      }
+      // 复原，形成循环
+      i = i >= sliderData.length ? 0 : i
+      toggle()
+    })
+
+    // 左侧按钮
+    const prev = document.querySelector('.prev')
+    prev.addEventListener('click', function () {
+      // console.log(11);
+      i--
+      // 复原，形成循环
+      i = i < 0 ? 7 : i
+      toggle()
+    })
+
+    // 声明一个渲染的函数作为复用
+    function toggle() {
       img.src = sliderData[i].url
       p.innerHTML = sliderData[i].title
-      // 小圆点
-      // 删除当前active
+      footer.style.background = sliderData[i].color
+      //更换小圆点
+      //  1.先移除原来的类名
       document.querySelector('.slider-indicator .active').classList.remove('active')
-      // 只让当前li添加active
+      // 2.再添加现在的
       document.querySelector(`.slider-indicator li:nth-child(${i + 1})`).classList.add('active')
+    }
 
-
-
-
+    // 设置自动播放
+    let timeId = setInterval(function () {
+      // 利用JS自动调用点击事件
+      next.click()
     }, 1000)
 
+
+    const slider = document.querySelector('.slider')
+    // 鼠标经过大盒子，停止计时器
+    slider.addEventListener('mouseenter', function () {
+      // 停止计时器
+      clearInterval(timeId)
+    })
+    // 鼠标离开大盒子，启动计时器
+    slider.addEventListener('mouseleave', function () {
+      // 启动定时器 删除timeId会使得定时器再生成一个Id，上面的停止计时器不起作用
+      timeId = setInterval(function () {
+        // 利用JS自动调用点击事件
+        next.click()
+      }, 1000)
+    })
   </script>
 </body>
 
